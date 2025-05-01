@@ -1,5 +1,6 @@
 import type { V2_MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
+import homeStyle from "../styles/home.css";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -20,4 +21,8 @@ export default function Index() {
       </main>
     </>
   );
+}
+
+export function links() {
+  return [{ rel: "stylesheet", href: homeStyle }];
 }
