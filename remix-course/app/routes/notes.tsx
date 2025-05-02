@@ -11,3 +11,5 @@ export default function NotesPage() {
 export function links() {
   return [...newNoteLinks()];
 }
+
+export function action() {}
