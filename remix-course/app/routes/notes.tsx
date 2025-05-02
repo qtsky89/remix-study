@@ -1,13 +1,15 @@
 import { getStoredNotes, storeNotes } from "~/data/notes";
 import NewNote, { links as newNoteLinks } from "../components/NewNote";
-import NoteList, { links as noteListLinks } from "../components/NewKist";
+import NoteList, { links as noteListLinks } from "../components/NoteList";
 import { redirect } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 
 export default function NotesPage() {
+  const notes = useLoaderData();
   return (
     <main>
       <NewNote />
-      <NoteList />
+      <NoteList notes={notes} />
     </main>
   );
 }
@@ -16,7 +18,12 @@ export function links() {
   return [...newNoteLinks(), ...noteListLinks()];
 }
 
-export function loader() {}
+export async function loader() {
+  const notes = await getStoredNotes();
+  return notes;
+  // return new Response(JSON.stringify(notes), {headers: {'Content-Type': 'application/json'}})
+  // return json(notes);
+}
 
 export async function action({ request }) {
   const formData = await request.formData();
