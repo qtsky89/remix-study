@@ -88,3 +88,12 @@ export function CatchBoundary() {
     </main>
   );
 }
+
+export function meta() {
+  return [
+    {
+      title: "All Notes",
+      description: "Manage your notes with ease.",
+    },
+  ];
+}

@@ -24,8 +24,6 @@ export function CatchBoundary() {
   return (
     <html lang="en">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
         <title>{caughtResponse.statusText}</title>
@@ -55,8 +53,6 @@ export function ErrorBoundary({ error }) {
   return (
     <html lang="en">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
         <title>An error occurred</title>
@@ -85,8 +81,6 @@ export default function App() {
   return (
     <html lang="en">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
       </head>
@@ -101,4 +95,14 @@ export default function App() {
       </body>
     </html>
   );
+}
+
+export function meta() {
+  return [
+    {
+      charset: "utf-8",
+      title: "New remix app",
+      viewport: "width=device-width,initial-scale=1",
+    },
+  ];
 }
