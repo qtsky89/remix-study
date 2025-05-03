@@ -1,8 +1,8 @@
 import { getStoredNotes, storeNotes } from "~/data/notes";
 import NewNote, { links as newNoteLinks } from "../components/NewNote";
 import NoteList, { links as noteListLinks } from "../components/NoteList";
-import { redirect } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { json, redirect } from "@remix-run/node";
+import { Link, useCatch, useLoaderData } from "@remix-run/react";
 
 export default function NotesPage() {
   const notes = useLoaderData();
@@ -21,6 +21,19 @@ export function links() {
 
 export async function loader() {
   const notes = await getStoredNotes();
+  if (!notes || notes.length === 0) {
+    // throw new Response();
+    throw json(
+      {
+        message: "coulnd't find any notes.",
+      },
+      {
+        status: 404,
+        statusText: "not found",
+      }
+    );
+  }
+
   return notes;
   // return new Response(JSON.stringify(notes), {headers: {'Content-Type': 'application/json'}})
   // return json(notes);
@@ -59,6 +72,19 @@ export function ErrorBoundary({ error }) {
       <p>
         Back to <Link to="/">safety</Link>
       </p>
+    </main>
+  );
+}
+
+export function CatchBoundary() {
+  const caughtResponse = useCatch();
+
+  const message = caughtResponse.data?.message || "Data not found.";
+
+  return (
+    <main>
+      <NewNote></NewNote>
+      <p className="info-message">{message}</p>
     </main>
   );
 }
