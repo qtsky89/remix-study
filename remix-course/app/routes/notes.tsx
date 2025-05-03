@@ -6,6 +6,7 @@ import { useLoaderData } from "@remix-run/react";
 
 export default function NotesPage() {
   const notes = useLoaderData();
+
   return (
     <main>
       <NewNote />
@@ -35,6 +36,9 @@ export async function action({ request }) {
 
   const noteData = Object.fromEntries(formData);
   // TODO. validation
+  if (noteData.title.trim().length < 5) {
+    return { message: "Invalid title - must be at least 5 characters long." };
+  }
 
   const existingNotes = await getStoredNotes();
   noteData.id = new Date().toISOString();
