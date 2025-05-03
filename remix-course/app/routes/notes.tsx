@@ -2,7 +2,7 @@ import { getStoredNotes, storeNotes } from "~/data/notes";
 import NewNote, { links as newNoteLinks } from "../components/NewNote";
 import NoteList, { links as noteListLinks } from "../components/NoteList";
 import { redirect } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 
 export default function NotesPage() {
   const notes = useLoaderData();
@@ -49,4 +49,16 @@ export async function action({ request }) {
   await new Promise<void>((resolve) => setTimeout(() => resolve(), 2000));
 
   return redirect("/notes");
+}
+
+export function ErrorBoundary({ error }) {
+  return (
+    <main className="error">
+      <h1>An error occurred</h1>
+      <p>{error.message}</p>
+      <p>
+        Back to <Link to="/">safety</Link>
+      </p>
+    </main>
+  );
 }
