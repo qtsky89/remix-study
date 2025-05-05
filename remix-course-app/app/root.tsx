@@ -31,3 +31,7 @@ export default function App() {
     </html>
   );
 }
+
+export function meta() {
+  return [];
+}
