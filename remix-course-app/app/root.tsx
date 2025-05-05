@@ -8,17 +8,17 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import sharedStyles from "~/styles/shared.css";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  { rel: "stylesheet", href: sharedStyles },
 ];
 
 export default function App() {
   return (
     <html lang="en">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
       </head>
@@ -33,5 +33,11 @@ export default function App() {
 }
 
 export function meta() {
-  return [];
+  return [
+    {
+      charset: "utf-8",
+      title: "New remix app",
+      viewport: "width=device-width,initial-scale=1",
+    },
+  ];
 }
