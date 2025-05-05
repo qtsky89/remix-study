@@ -1,7 +1,8 @@
 import authStyles from "~/styles/auth.css";
+import AuthForm from "~/components/auth/AuthForm";
 
 export default function View() {
-  return <h1>auth</h1>;
+  return <AuthForm />;
 }
 
 export function links() {
