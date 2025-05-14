@@ -10,3 +10,5 @@ export default function View() {
     </Modal>
   );
 }
+
+export function action() {}
