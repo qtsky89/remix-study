@@ -3,6 +3,7 @@ import { useNavigate } from "@remix-run/react";
 import ExpenseForm from "~/components/expenses/ExpenseForm";
 import Modal from "~/components/util/Modal";
 import { addExpense } from "~/data/expenses.server";
+import { validateExpenseInput } from "~/data/validation.server";
 
 export default function View() {
   const navigate = useNavigate();
@@ -17,8 +18,13 @@ export async function action({ request }) {
   const formData = await request.formData();
   const expenseData = Object.fromEntries(formData);
 
-  console.log("formData: ", formData);
-  console.log("expenseData: ", expenseData);
+  try {
+    // validate the form data
+    validateExpenseInput(expenseData);
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
 
   await addExpense(expenseData);
   return redirect("/expenses");
