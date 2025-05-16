@@ -1,4 +1,10 @@
-import { Link, useActionData, useSubmit } from "@remix-run/react";
+import {
+  Form,
+  Link,
+  useActionData,
+  useSubmit,
+  useNavigation,
+} from "@remix-run/react";
 
 function ExpenseForm() {
   const today = new Date().toISOString().slice(0, 10); // yields something like 2023-09-10
@@ -15,8 +21,11 @@ function ExpenseForm() {
     });
   }
 
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state !== "idle";
+
   return (
-    <form
+    <Form
       method="post"
       className="form"
       id="expense-form"
@@ -52,10 +61,12 @@ function ExpenseForm() {
         </ul>
       )}
       <div className="form-actions">
-        <button>Save Expense</button>
+        <button disabled={isSubmitting}>
+          {isSubmitting ? "Saving" : "Save Expense"}
+        </button>
         <Link to="..">Cancel</Link>
       </div>
-    </form>
+    </Form>
   );
 }
 
