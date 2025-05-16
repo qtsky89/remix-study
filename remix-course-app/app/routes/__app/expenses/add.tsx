@@ -16,7 +16,9 @@ export default function View() {
 export async function action({ request }) {
   const formData = await request.formData();
   const expenseData = Object.fromEntries(formData);
-  console.log(formData, expenseData);
+
+  console.log("formData: ", formData);
+  console.log("expenseData: ", expenseData);
 
   await addExpense(expenseData);
   return redirect("/expenses");
