@@ -21,3 +21,12 @@ export async function getExpenses() {
     throw error
   }
 }
+
+export async function getExpense(expenseId: string) {
+  try {
+    return await prisma.expense.findFirst({where: {id: expenseId}})
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
