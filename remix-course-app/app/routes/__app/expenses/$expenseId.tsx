@@ -40,8 +40,9 @@ export async function action({ params, request }) {
     }
     console.log("hoy?");
     await updateExpense(expenseId, expenseData);
+    return redirect("/expenses");
   } else if (request.method === "DELETE") {
     await deleteExpense(expenseId);
+    return { deletedId: expenseId };
   }
-  return redirect("/expenses");
 }
