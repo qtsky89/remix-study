@@ -36,26 +36,11 @@ function ExpenseForm() {
         date: "",
       };
 
-  function submitHandler(event) {
-    event.preventDefault();
-
-    // peform your own validation
-    submit(event.target, {
-      action: "/expenses/add",
-      method: "post",
-    });
-  }
-
   const navigation = useNavigation();
   const isSubmitting = navigation.state !== "idle";
 
   return (
-    <Form
-      method="post"
-      className="form"
-      id="expense-form"
-      onSubmit={submitHandler}
-    >
+    <Form method="post" className="form" id="expense-form">
       <p>
         <label htmlFor="title">Expense Title</label>
         <input
