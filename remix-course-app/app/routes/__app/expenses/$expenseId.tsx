@@ -16,6 +16,7 @@ export default function View() {
 export async function loader({ params }) {
   const expenseId = params.expenseId;
 
+  console.log("EXPENSE ID LOADER");
   const expense = await getExpense(expenseId);
   return expense;
 }
