@@ -9,7 +9,7 @@ export async function addExpense(expenseData) {
   }})  
   } catch (error) {
     console.log(error)
-    throw error
+    throw new Error(`Failed to create expense.`)
   }
 }
 
@@ -18,7 +18,7 @@ export async function getExpenses() {
     return await prisma.expense.findMany({orderBy: {date: 'desc'}}) 
   } catch (error) {
     console.log(error)
-    throw error
+    throw new Error(`Failed to fetch expenses.`)
   }
 }
 
@@ -27,7 +27,7 @@ export async function getExpense(expenseId: string) {
     return await prisma.expense.findFirst({where: {id: expenseId}})
   } catch (error) {
     console.log(error)
-    throw error
+    throw new Error(`Failed to fetch expense. expenseId=${expenseId}`)
   }
 }
 
@@ -54,6 +54,6 @@ export async function deleteExpense(expenseId: string) {
     })
   } catch (error) {
     console.log(error)   
-    throw error
+    throw new Error(`Failed to deleted expense. expenseId=${expenseId}`)
   }
 }
