@@ -2,9 +2,9 @@ import {
   Form,
   Link,
   useActionData,
-  useSubmit,
+  //useSubmit,
   useNavigation,
-  useLoaderData,
+  //useLoaderData,
   useMatches,
   useParams,
 } from "@remix-run/react";
@@ -12,7 +12,7 @@ import {
 function ExpenseForm() {
   const today = new Date().toISOString().slice(0, 10); // yields something like 2023-09-10
   const validationErrors = useActionData();
-  const submit = useSubmit();
+  // const submit = useSubmit();
   // const expenseData = useLoaderData();
   const params = useParams();
 
@@ -23,6 +23,10 @@ function ExpenseForm() {
   const expenseData = expenses.find(
     (expense) => expense.id === params.expenseId
   );
+
+  if (params.expenseId && !expenseData) {
+    return <p>Invalid expense Id. {params.id}</p>;
+  }
 
   const defaultValue = expenseData
     ? {
