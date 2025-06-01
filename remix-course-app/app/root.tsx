@@ -67,7 +67,7 @@ export function CatchBoundary() {
               "Something went wrong. Please try again later."}
           </p>
           <p>
-            Back to <Link to="/">main</Link>
+            Back to <Link to="/">main1</Link>
           </p>
         </Error>
       </main>
@@ -84,7 +84,7 @@ export function ErrorBoundary({ error }) {
             {error.message || "Something went wrong. Please try again later."}
           </p>
           <p>
-            Back to <Link to="/">main</Link>
+            Back to <Link to="/">main2</Link>
           </p>
         </Error>
       </main>

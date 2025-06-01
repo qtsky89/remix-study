@@ -9,6 +9,8 @@ export default function ExpensesLayout() {
 
   // it can be run in front, backend
 
+  const hasExpenses = expenses && expenses.length > 0;
+
   return (
     <>
       <Outlet />
@@ -24,7 +26,15 @@ export default function ExpensesLayout() {
           </a>
         </section>
 
-        <ExpensesList expenses={expenses} />
+        {hasExpenses && <ExpensesList expenses={expenses} />}
+        {!hasExpenses && (
+          <section id="no-expenses">
+            <h1>No expenses found</h1>
+            <p>
+              <Link to="add">Start adding some</Link>
+            </p>
+          </section>
+        )}
       </main>
     </>
   );
@@ -32,7 +42,19 @@ export default function ExpensesLayout() {
 
 export async function loader() {
   const expenses = await getExpenses();
+
+  // if (!expenses || expenses.length === 0) {
+  //   throw json(
+  //     { message: "Coundt find any expenses." },
+  //     { status: 404, statusText: "No expenses found" }
+  //   );
+  // }
+
   // return expenses;
   console.log("EXPENSE LOADER");
   return json(expenses);
 }
+
+// export function CatchBoundary() {
+//   return <p>Error</p>;
+// }
