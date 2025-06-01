@@ -73,3 +73,13 @@ export async function getUserFromSession(request) {
 
   return userId
 }
+
+export async function destroyUserSession(request) {
+  const session = await sessionStorage.getSession(request.headers.get('Cookie'))
+  
+  return redirect('/', {
+    headers: {
+      'Set-Cookie': await sessionStorage.destroySession(session)
+    }
+  })
+}
