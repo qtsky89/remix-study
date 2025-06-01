@@ -55,7 +55,13 @@ export async function loader({ request }) {
 
   // return expenses;
   console.log("EXPENSE LOADER");
-  return json(expenses);
+  return json(expenses, { headers: { "Cache-Control": "max-age=3" } });
+}
+
+export function headers({ actionHeaders, loaderHeaders, parentHeaders }) {
+  return {
+    "Cache-Control": loaderHeaders.get("Cache-Control"),
+  };
 }
 
 // export function CatchBoundary() {
