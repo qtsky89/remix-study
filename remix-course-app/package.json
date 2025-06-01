@@ -14,6 +14,7 @@
     "@remix-run/express": "^1.19.3",
     "@remix-run/node": "^1.19.3",
     "@remix-run/react": "^1.19.3",
+    "bcryptjs": "^3.0.2",
     "compression": "^1.7.4",
     "cross-env": "^7.0.3",
     "express": "^4.18.2",
