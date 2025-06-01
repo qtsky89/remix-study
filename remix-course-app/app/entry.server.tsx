@@ -105,6 +105,7 @@ function handleBrowserRequest(
           const body = new PassThrough();
 
           responseHeaders.set("Content-Type", "text/html");
+          // responseHeaders.set("X-My-Header", "Some Value");
 
           resolve(
             new Response(body, {

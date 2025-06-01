@@ -7,7 +7,7 @@ export default function Index() {
       <section className="marketing-section">
         <header>
           <FaDollarSign />
-          <h2>A Central Space</h2>
+          <h2>A Central Space2</h2>
         </header>
         <div className="marketing-content">
           <div className="marketing-image">
@@ -50,5 +50,11 @@ export function meta() {
   return {
     title: "Remix expenses -> The Complete App",
     descrption: "Manage your expenses!",
+  };
+}
+
+export function headers() {
+  return {
+    "Cache-Control": "max-age=3600",
   };
 }
