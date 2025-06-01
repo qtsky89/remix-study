@@ -4,6 +4,7 @@ import { getExpenses } from "~/data/expenses.server";
 import { useCatch, useLoaderData } from "@remix-run/react";
 import { json } from "@remix-run/node";
 import Error from "~/components/util/Error";
+import { requireUserSession } from "~/data/auth.server";
 
 // const DUMMY_EXPENSES = [
 //   {
@@ -31,7 +32,9 @@ export default function View() {
   );
 }
 
-export async function loader() {
+export async function loader({ request }) {
+  await requireUserSession(request);
+
   const expenses = await getExpenses();
 
   if (!expenses || expenses.length === 0) {
