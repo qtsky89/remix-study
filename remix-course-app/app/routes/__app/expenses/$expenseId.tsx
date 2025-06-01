@@ -46,3 +46,16 @@ export async function action({ params, request }) {
     return { deletedId: expenseId };
   }
 }
+
+// location => window.location.href (URL)
+export function meta({ params, location, data, parentsData }) {
+  console.log(params, location, data, parentsData);
+
+  const expense = parentsData["routes/__app/expenses"].find(
+    (expense) => expense.id === params.expenseId
+  );
+  return {
+    title: expense.title,
+    descrption: "Update expense.",
+  };
+}

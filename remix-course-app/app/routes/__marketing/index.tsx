@@ -46,4 +46,9 @@ export default function Index() {
   );
 }
 
-export function meta() {}
+export function meta() {
+  return {
+    title: "Remix expenses -> The Complete App",
+    descrption: "Manage your expenses!",
+  };
+}

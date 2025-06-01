@@ -1,5 +1,5 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction, V2_MetaFunction } from "@remix-run/node";
 import {
   Link,
   Links,
@@ -12,6 +12,7 @@ import {
 } from "@remix-run/react";
 import sharedStyles from "~/styles/shared.css";
 import Error from "./components/util/Error";
+import { ReactNode } from "react";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -26,11 +27,17 @@ export default function App() {
   );
 }
 
-export function Document({ title, children }) {
+export function Document({
+  title,
+  children,
+}: {
+  title?: string;
+  children: ReactNode;
+}) {
   return (
     <html lang="en">
       <head>
-        <title>{title}</title>
+        {title && <title>{title}</title>}
         <Meta />
         <Links />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -93,11 +100,19 @@ export function ErrorBoundary({ error }) {
 }
 
 export function meta() {
-  return [
-    {
-      charset: "utf-8",
-      title: "New remix app",
-      viewport: "width=device-width,initial-scale=1",
-    },
-  ];
+  return {
+    charset: "utf-8",
+    title: "New remix app",
+    viewport: "width=device-width,initial-scale=1",
+  };
 }
+
+// export const meta: V2_MetaFunction = () => {
+//   return [
+//     {
+//       name: "viewport",
+//       content: "width=device-width,initial-scale=1",
+//     },
+//     { title: "New Remix App" },
+//   ];
+// };
