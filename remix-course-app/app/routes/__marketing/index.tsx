@@ -58,3 +58,5 @@ export function headers({ actionHeaders, loaderHeaders, parentHeaders }) {
     "Cache-Control": parentHeaders.get("Cache-Control"),
   };
 }
+
+export const handle = { disableJS: true };
