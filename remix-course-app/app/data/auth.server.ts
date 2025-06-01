@@ -84,10 +84,12 @@ export async function destroyUserSession(request) {
   })
 }
 
-export async function requireUserSession(request) {
+export async function requireUserSession(request): Promise<string> {
   const userId = await getUserFromSession(request)
 
   if(!userId) {
     throw redirect('/auth?mode=login')
   }
+
+  return userId
 }

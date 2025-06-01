@@ -33,9 +33,9 @@ export default function View() {
 }
 
 export async function loader({ request }) {
-  await requireUserSession(request);
+  const userId = await requireUserSession(request);
 
-  const expenses = await getExpenses();
+  const expenses = await getExpenses(userId);
 
   if (!expenses || expenses.length === 0) {
     throw json(
